@@ -11,18 +11,21 @@ http.listen(8080, function(){
 });
 
 io.on('connection', function(socket){ //on connection event
-    
-    socket.on('connect',function(user){
-        socket.broadcast.emit('newUser', user + " is connected");
+
+    var userConnected = null;
+
+    socket.on('userConnection',function(user){
+        userConnected = user;
+        socket.broadcast.emit('chat msg', userConnected + " is connected");
     })
 
-    socket.on('disconnect',function(){
-        socket.broadcast.emit('disconnectUser',"a user is disconnected");
+    .on('disconnect',function(){
+        socket.broadcast.emit('chat msg',"a user is disconnected");
     })
 
-    socket.on('chat msg', function(msg){ //on chat message event 
+    .on('chat msg', function(msg){ //on chat message event 
         if(msg != "" ){ //verify the message is not empty
-            io.emit('chat msg',msg); //finally broadcast the message
+            io.emit('chat msg',userConnected + " said: " + msg); //finally broadcast the message
         } 
     });
 });

@@ -23,7 +23,12 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
         $(function () {
+            var pseudo = prompt("Renseigner un identifiant :")
             var socket = io(); //connect
+
+            console.log(pseudo);
+            socket.emit('userConnection', pseudo);
+
 
                                 // SEND TO THE BACK 
             $('form').submit(function(){ //when i submit my form
@@ -34,12 +39,6 @@
 
                                 // RECEIVE AND PRINT MSG   
             socket.on('chat msg', function(msg){ //on chat message event
-                $('#messages').append($('<li>').text(msg)); //print message in messages list 
-            });
-            socket.on('newUser', function(msg){ //on chat message event
-                $('#messages').append($('<li>').text(msg)); //print message in messages list 
-            });
-            socket.on('disconnectUser', function(msg){ //on chat message event
                 $('#messages').append($('<li>').text(msg)); //print message in messages list 
             });
         });
