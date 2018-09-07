@@ -36,6 +36,12 @@
             socket.on('chat msg', function(msg){ //on chat message event
                 $('#messages').append($('<li>').text(msg)); //print message in messages list 
             });
+            socket.on('newUser', function(msg){ //on chat message event
+                $('#messages').append($('<li>').text(msg)); //print message in messages list 
+            });
+            socket.on('disconnectUser', function(msg){ //on chat message event
+                $('#messages').append($('<li>').text(msg)); //print message in messages list 
+            });
         });
     </script>
 </html>
