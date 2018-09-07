@@ -30,8 +30,7 @@
         $(function () {
             var pseudo = prompt("Renseigner un identifiant :")
             var socket = io(); //connect
-
-            console.log(pseudo);
+            
             socket.emit('userConnection', pseudo);
 
 
